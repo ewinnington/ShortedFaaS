@@ -35,9 +35,10 @@ A production level FaaS would create isolation with containers which include the
 Asynchronous calls to the functions are not planned to be supported in the first iteration but the design is as follows: The path to an asynchronous function is /a/{folder_name} and returns an HTTP 202 result with an id. The result can be collected from /r/{id} when finished (HTTP 200 on success with body, 500 on failure), if called before a result is available then HTTP 102 is the reply.
 
 ShortedFaaS provides:
-/list which returns the listing of functions loaded
-/history which returns the last executed functions and their return code (probably in memory only - last X invocations available)
-/history/{id} when logging all data, the inputs, outputs, errors, exit codes and HTTP response are returned (probably in memory only - last X invocations available)
+
+- /list which returns the listing of functions loaded
+- /history which returns the last executed functions and their return code (probably in memory only - last X invocations available)
+- /history/{id} when logging all data, the inputs, outputs, errors, exit codes and HTTP response are returned (probably in memory only - last X invocations available)
 
 Ideally, the lambda definition for hosted languages should as close as possible to AWS, Azure and Google functions definitions. The type could even be specified in run.json to support all three.
 
@@ -47,7 +48,7 @@ Because I want to see what is needed for a FaaS provider.
 
 ## Will this progress beyond a prototype?
 
-Probably not, if you have a used case for a function as a service provider use OpenFaaS, fassd, kNative, OpenWhisk, Fn or any other of the cloud provider function as a service services (Azure, AWS, Google Cloud, …).
+Probably not, if you have a use case for a function as a service provider use OpenFaaS, fassd, kNative, OpenWhisk, Fn or any other of the cloud provider function as a service services (Azure, AWS, Google Cloud, …).
 
 ## Why doesn’t the lambda receive a json object instead of a raw string?
 
