@@ -51,7 +51,7 @@ Probably not, if you have a used case for a function as a service provider use O
 
 ## Why doesn’t the lambda receive a json object instead of a raw string?
 
-Because I don’t want to implement any type of logic in ShortedFaaS, so the body of the request is passed in as-is. Also means you can receive xml, csv, base64 or whatever you want. Ideally, run.json would tell ShortedFaaS what it accepts, but that’s a feature I’m not (yet) planning on. It would be implemented as a list of Accept mime types and ShortedFaaS would reject any invocation that doesn’t pass the right mime type header (no payload validation) and no conversion. 
+Because I don’t want to implement any type of logic in ShortedFaaS, so the body of the request is passed in as-is. Also means you can receive xml, csv, base64 or whatever you want. Ideally, run.json would tell ShortedFaaS what it accepts, but that’s a feature I’m not (yet) planning on. It would be implemented as a list of Accept mime types and ShortedFaaS would reject any invocation that doesn’t pass the right mime type header (no payload validation) and no conversion. Up to the lambda to read the input mime type from the environment and do the conversion there. Similarly for the output, the accept mime type header would be passed to the environment, up to the lambda to respect it or not. 
 
 ## How does the Authentication work?
 
