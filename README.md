@@ -63,3 +63,6 @@ Environment variable: ShortedFaaS_SharedSecret
 
 When I’ve written it. ShortedFaaS is a late night sketch. 
 
+## Something Something Containers / Docker / Kubernetes
+
+Yes, that's how a FaaS should work ideally. Isolated functions. 
