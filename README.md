@@ -33,7 +33,7 @@ For interpreted or hosted languages a standard function definition lambda(input,
 A production level FaaS would create isolation with containers which include the runtime and libraries necessary to run. Here, the host must provide everything for simplicity.
 
 Asynchronous calls to the functions are not planned to be supported in the first iteration but the design is as follows: 
-- The path to an asynchronous function is /a/{folder_name} and returns an HTTP 202 result with an id. The result can be collected from /r/{id} when finished (HTTP 200 on success with body, 500 on failure), if called before a result is available then HTTP 102 is the reply.
+- The path to an asynchronous function is /a/{folder_name} and returns an HTTP 202 result with an id. The result can be collected from /r/{folder_name}/{id} when finished (HTTP 200 on success with body, 500 on failure), if called before a result is available then HTTP 202 is the reply.
 - A task token can be passed in the header of the call, along with a callback url which is then called back with an HTTP Post containing the output and the token in body. 
     
     { "output": "…", "task-token": "xx-yy-zz-00" }
