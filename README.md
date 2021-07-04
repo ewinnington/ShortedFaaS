@@ -129,10 +129,10 @@ If enabled at ShortedFaaS host level all functions require authentication. In an
 
 Environment variable: ShortedFaaS_SharedSecret 
 
-## When can I see some code? 
+### When can I see some code? 
 
 When I’ve written it. ShortedFaaS is a late night sketch. 
 
-## Something Something Containers / Docker / Kubernetes
+### Something Something Containers / Docker / Kubernetes
 
 Yes, that's how a FaaS should work ideally. Isolated functions. 
