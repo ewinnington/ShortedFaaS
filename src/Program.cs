@@ -46,9 +46,6 @@ app.MapPost("/f/{name}", async context => {
 
     var name = context.Request.RouteValues["name"];
 
-    using StreamReader input = new StreamReader(context.Request.Body, Encoding.UTF8);
-    string rawinput = await input.ReadToEndAsync(); 
-
     var result = await Cli.Wrap(@$"C:\Repos\ShortedFaaS\src\deploy\{name}\jq.exe")
         .WithArguments(".")
         .WithWorkingDirectory("")
@@ -56,7 +53,7 @@ app.MapPost("/f/{name}", async context => {
         .WithEnvironmentVariables(env => env
             .Set("ENV_VAR_1", "Data1")
             .Set("ENV_VAR_1", "Data2"))
-        .WithStandardInputPipe(PipeSource.FromString(rawinput))
+        .WithStandardInputPipe(PipeSource.FromStream(context.Request.Body))
         .ExecuteBufferedAsync(); 
 
     if (result.ExitCode == 0) 
