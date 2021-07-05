@@ -10,11 +10,14 @@ using CliWrap;
 using CliWrap.Buffered;
 using ewinnington.ShortedFaas; 
 
-string deploy_root = @"C:\Repos\ShortedFaaS\src\deploy\"; 
+string deploy_root = Environment.GetEnvironmentVariable("ShortedFaaS_Deploy");
+if(deploy_root == null) deploy_root = Path.Combine(@"C:\Repos\ShortedFaaS\src", "deploy"); 
+
+Console.WriteLine("Functions are deployed from " + deploy_root);
 
 var HostedFunctions = new ConcurrentDictionary<string, HostedFunction>(); 
-HostedFunctions["jq"] = new HostedFunction("jq", @"jq.exe", new List<string>{"."}, new Dictionary<string, string>());
-HostedFunctions["py-hi"] = new HostedFunction("py-hi", @"python", new List<string>(){@"py-hi.py"}, new Dictionary<string, string>());
+HostedFunctions["jq"] = new HostedFunction("jq", Path.Combine(deploy_root,@"jq\jq.exe"), new List<string>{"."}, new Dictionary<string, string>());
+HostedFunctions["py-hi"] = new HostedFunction("py-hi", "python", new List<string>(){@"py-hi.py"}, new Dictionary<string, string>());
 HostedFunctions["py-json"] = new HostedFunction("py-json", @"python", new List<string>(){@"py-json.py"}, new Dictionary<string, string>());
 HostedFunctions["js-hi"] = new HostedFunction("js-hi", @"node", new List<string>(){@"js-hi.js"}, new Dictionary<string, string>());
 HostedFunctions["js-json"] = new HostedFunction("js-json", @"node", new List<string>(){@"js-json.js"}, new Dictionary<string, string>());
@@ -39,7 +42,7 @@ app.MapPost("/f/{name}", async context => {
         .WithValidation(CommandResultValidation.None)
         .WithEnvironmentVariables(target.Environment)
         .WithStandardInputPipe(PipeSource.FromStream(context.Request.Body))
-        .ExecuteBufferedAsync(); 
+        .ExecuteBufferedAsync();
 
     if (result.ExitCode == 0) 
         {
