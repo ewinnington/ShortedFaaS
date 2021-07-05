@@ -21,6 +21,8 @@ HostedFunctions["py-hi"] = new HostedFunction("py-hi", "python", new List<string
 HostedFunctions["py-json"] = new HostedFunction("py-json", @"python", new List<string>(){@"py-json.py"}, new Dictionary<string, string>());
 HostedFunctions["js-hi"] = new HostedFunction("js-hi", @"node", new List<string>(){@"js-hi.js"}, new Dictionary<string, string>());
 HostedFunctions["js-json"] = new HostedFunction("js-json", @"node", new List<string>(){@"js-json.js"}, new Dictionary<string, string>());
+HostedFunctions["rust-hi"] = new HostedFunction("rust-hi",  Path.Combine(deploy_root,@"rust-hi\rust-hi.exe"), new List<string>(){}, new Dictionary<string, string>());
+HostedFunctions["wasm-rust-hi"] = new HostedFunction("wasm-rust-hi",  @"wasmtime.exe", new List<string>(){"wasm-rust-hi.wasm"}, new Dictionary<string, string>());
 
 
 var builder = WebApplication.CreateBuilder(args);

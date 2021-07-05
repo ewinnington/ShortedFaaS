@@ -34,3 +34,9 @@ Next steps:
     - add in-process function with dynamic loads 
         - iron-python 
         - octave.net 
+
+
+## 2021.7.6
+
+Added the environment variable for the Deploy folder "ShortedFaaS_Deploy". 
+Added out of process Rust and out of process Wasm from the Rust.
